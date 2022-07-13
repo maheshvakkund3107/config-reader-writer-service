@@ -20,7 +20,7 @@ import java.io.Writer;
 @SpringBootApplication
 @RestController
 @CrossOrigin(origins = "*")
-public class ConfigReaderWriterServiceApplication  extends SpringBootServletInitializer {
+public class ConfigReaderWriterServiceApplication {
 
     @PostMapping("/processrequest")
     public String register(@RequestBody ConfigReaderWriterModel user) throws ReaderWriterException {
@@ -32,16 +32,16 @@ public class ConfigReaderWriterServiceApplication  extends SpringBootServletInit
                 "--driver-memory 8g \\\n" +
                 "--executor-memory 8g \\\n" +
                 "--executor-cores 8 \\\n" +
-                "--files /home/mahesh/Documents/Deployment/apache-tomcat-9.0.64/webapps/datacopier_resources/application.properties,/home/mahesh/Documents/Deployment/apache-tomcat-9.0.64/webapps/datacopier_resources/gcp_credentials.txt,/home/mahesh/Documents/Deployment/apache-tomcat-9.0.64/webapps/datacopier_resources/gcp_encrypted_credentials.json \\\n" +
+                "--files /home/mahesh/Documents/XEROX/config-reader-writer-service/src/main/java/com/configreaderwriter/service/api/datacopier/application.properties,/home/mahesh/Documents/XEROX/config-reader-writer-service/src/main/java/com/configreaderwriter/service/api/datacopier/gcp_credentials.txt,/home/mahesh/Documents/XEROX/config-reader-writer-service/src/main/java/com/configreaderwriter/service/api/datacopier/gcp_encrypted_credentials.json \\\n" +
                 "--jars=NA \\\n" +
-                "/home/mahesh/Documents/Deployment/apache-tomcat-9.0.64/webapps/datacopier_resources/data-copier-1.0.0-SNAPSHOT.jar /home/mahesh/Documents/Deployment/apache-tomcat-9.0.64/webapps/datacopier_resources/application.properties " + user.getConfigReader() + " " + user.getConfigWriter() + " " + "NA NA NA NA NA\n";
+                "/home/mahesh/Documents/XEROX/config-reader-writer-service/src/main/java/com/configreaderwriter/service/api/datacopier/data-copier-1.0.0-SNAPSHOT.jar /home/mahesh/Documents/XEROX/config-reader-writer-service/src/main/java/com/configreaderwriter/service/api/datacopier/application.properties " + user.getConfigReader() + " " + user.getConfigWriter() + " " + "NA NA NA NA NA\n";
         try {
-            Writer output = new BufferedWriter(new FileWriter("/home/mahesh/Documents/Deployment/apache-tomcat-9.0.64/webapps/datacopier_resources/write/reader-writer.sh"));
+            Writer output = new BufferedWriter(new FileWriter("/home/mahesh/Documents/XEROX/config-reader-writer-service/src/main/java/com/configreaderwriter/service/api/write/reader-writer.sh"));
             output.write(scriptContent);
-            Runtime.getRuntime().exec("chmod u+x /home/mahesh/Documents/Deployment/apache-tomcat-9.0.64/webapps/datacopier_resources/write/reader-writer.sh");
+            Runtime.getRuntime().exec("chmod u+x /home/mahesh/Documents/XEROX/config-reader-writer-service/src/main/java/com/configreaderwriter/service/api/write/reader-writer.sh");
             output.flush();
             output.close();
-            Runtime.getRuntime().exec("/home/mahesh/Documents/Deployment/apache-tomcat-9.0.64/webapps/datacopier_resources/write/reader-writer.sh");
+            Runtime.getRuntime().exec("/home/mahesh/Documents/XEROX/config-reader-writer-service/src/main/java/com/configreaderwriter/service/api/write/reader-writer.sh");
         } catch (Exception e) {
             throw new ReaderWriterException("Error While Running : " + e);
         }
